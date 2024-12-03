@@ -23,8 +23,8 @@ function createMainWindow() {
 // 创建新增用户窗口
 function createAddUserWindow() {
     addUserWindow = new BrowserWindow({
-        width: 400,
-        height: 400,
+        width: 800,
+        height: 600,
         modal: true,
         parent: mainWindow,
         webPreferences: {
@@ -38,8 +38,8 @@ function createAddUserWindow() {
 // 创建编辑用户窗口
 function createEditUserWindow(id) {
     editUserWindow = new BrowserWindow({
-        width: 400,
-        height: 400,
+        width: 800,
+        height: 600,
         modal: true,
         parent: mainWindow,
         webPreferences: {
