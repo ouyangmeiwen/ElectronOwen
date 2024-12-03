@@ -3,6 +3,11 @@ const userTable = document.getElementById('user-table');
 // 获取用户数据并渲染
 async function loadUsers() {
     const users = await window.electronAPI.getUsers();
+    renderUserTable(users);
+}
+
+// 渲染用户数据到表格
+function renderUserTable(users) {
     userTable.innerHTML = users.map(user => `
         <tr>
             <td>${user.id}</td>
@@ -25,7 +30,12 @@ async function deleteUser(id) {
 
 // 编辑用户
 function editUser(id) {
-    window.location.href = `edit.html?id=${id}`;
+    window.electronAPI.createEditUserWindow(id);
 }
+
+// 监听更新用户列表的消息
+window.electronAPI.on('update-users', (event, users) => {
+    renderUserTable(users);
+});
 
 loadUsers();

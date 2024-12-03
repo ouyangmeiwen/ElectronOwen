@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 
-let mainWindow;
+let mainWindow, addUserWindow, editUserWindow;
 const db = new sqlite3.Database(path.join(__dirname, 'database', 'data.db'));
 
 // 创建主窗口
@@ -20,9 +20,41 @@ function createMainWindow() {
     mainWindow.loadFile('./renderer/index.html');
 }
 
+// 创建新增用户窗口
+function createAddUserWindow() {
+    addUserWindow = new BrowserWindow({
+        width: 400,
+        height: 400,
+        modal: true,
+        parent: mainWindow,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+        },
+    });
+    addUserWindow.loadFile('./renderer/addUser.html');
+}
+
+// 创建编辑用户窗口
+function createEditUserWindow(id) {
+    editUserWindow = new BrowserWindow({
+        width: 400,
+        height: 400,
+        modal: true,
+        parent: mainWindow,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+        },
+    });
+
+    // 使用 URL 格式拼接 id 参数，确保路径格式正确
+    const editUserUrl = `file://${path.join(__dirname, 'renderer', 'editUser.html')}?id=${id}`;
+    editUserWindow.loadURL(editUserUrl);  // 使用 loadURL 而不是 loadFile
+}
+
 // 应用事件
 app.whenReady().then(() => {
-    require('./database/initDB'); // 初始化数据库
     createMainWindow();
 
     app.on('activate', () => {
@@ -35,7 +67,7 @@ app.on('window-all-closed', () => {
 });
 
 // IPC 事件监听器
-ipcMain.handle('get-users', (event) => {
+ipcMain.handle('get-users', () => {
     return new Promise((resolve, reject) => {
         db.all('SELECT * FROM users', [], (err, rows) => {
             if (err) reject(err);
@@ -63,6 +95,7 @@ ipcMain.handle('delete-user', (event, id) => {
         });
     });
 });
+
 ipcMain.handle('get-user', (event, id) => {
     return new Promise((resolve, reject) => {
         const query = 'SELECT * FROM users WHERE id = ?';
@@ -81,4 +114,25 @@ ipcMain.handle('update-user', (event, user) => {
             resolve(true);
         });
     });
+});
+
+// 监听 reload-users 消息，刷新主界面的用户列表
+ipcMain.on('reload-users', async () => {
+    const users = await new Promise((resolve, reject) => {
+        db.all('SELECT * FROM users', [], (err, rows) => {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+
+    mainWindow.webContents.send('update-users', users);
+});
+
+// 打开新增用户窗口
+ipcMain.handle('open-add-user-window', () => {
+    createAddUserWindow();
+});
+// 打开编辑用户窗口
+ipcMain.handle('create-edit-user-window', (event, id) => {
+    createEditUserWindow(id);
 });
