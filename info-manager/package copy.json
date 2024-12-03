@@ -35,7 +35,7 @@
       "category": "public.app-category.utilities"
     },
     "win": {
-      "target": "zip",
+      "target": "nsis",
       "icon": "path/to/your/icon.ico"
     },
     "linux": {

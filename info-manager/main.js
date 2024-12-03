@@ -1,10 +1,26 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
 
 let mainWindow, addUserWindow, editUserWindow;
-const db = new sqlite3.Database(path.join(__dirname, 'database', 'data.db'));
-
+// 获取用户数据目录路径
+const userDataPath = app.getPath('userData');
+const dbPath = path.join(userDataPath, 'data.db');
+// 如果数据库文件不存在，从应用资源目录复制到 userData 目录
+if (!fs.existsSync(dbPath)) {
+    const sourceDbPath = path.join(__dirname, 'database', 'data.db'); // 源文件路径
+    fs.copyFileSync(sourceDbPath, dbPath); // 复制到 userData 目录
+    console.log('Database copied to user data directory');
+}
+// 创建 SQLite 数据库连接
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error('Error opening database:', err.message);
+    } else {
+      console.log('Database opened successfully at:', dbPath);
+    }
+  });
 // 创建主窗口
 function createMainWindow() {
     mainWindow = new BrowserWindow({
