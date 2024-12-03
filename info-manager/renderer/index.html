@@ -75,6 +75,11 @@
         .actions button {
             margin: 0 5px;
         }
+          /* 新增说明按钮的样式 */
+          .about-btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -82,7 +87,12 @@
         <h1>User Management</h1>
         <div class="btn-container">
             <button onclick="window.electronAPI.openAddUserWindow()">Add User</button>
+            <button onclick="window.location.href='about.html'">About</button>
         </div>
+          <!-- 说明按钮 -->
+          <div class="about-btn-container">
+        </div>
+
         <table>
             <thead>
                 <tr>
