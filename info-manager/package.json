@@ -5,15 +5,41 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . InfoManager --platform=win32 --arch=x64 --out=build --overwrite",
+    "build": "electron-builder",
     "init-db": "node ./database/initDB.js"
   },
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^26.2.0"
+    "electron": "^26.2.0",
+    "electron-builder": "^25.1.8"
   },
   "dependencies": {
     "sqlite3": "^5.1.6"
+  },
+  "build": {
+    "appId": "com.example.infomanager",
+    "productName": "InfoManager",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "renderer/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "path/to/your/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "path/to/your/icon.png"
+    }
   }
 }

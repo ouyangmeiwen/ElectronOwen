@@ -5,3 +5,16 @@ npm install -g yarn
 
 
 yarn install
+
+
+
+
+安装打包
+yarn add electron-builder --dev
+
+
+yarn run build --win
+
+yarn run build --mac
+
+yarn run build --linux
