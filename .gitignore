@@ -1,3 +1,4 @@
 
 /electron-template/node_modules
 /info-manager/node_modules
+info-manager/users.db
