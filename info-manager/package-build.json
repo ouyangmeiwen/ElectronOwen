@@ -26,7 +26,8 @@
       "renderer/**/*",
       "main.js",
       "package.json",
-      "database/data.db"
+      "preload.js",
+      "database/**/*"
     ],
     "directories": {
       "output": "dist"

@@ -15,6 +15,7 @@
     "electron-builder": "^25.1.8"
   },
   "dependencies": {
+    "info-manager": "file:",
     "sqlite3": "^5.1.6"
   },
   "build": {
@@ -26,7 +27,7 @@
       "renderer/**/*",
       "main.js",
       "package.json",
-      "database/data.db"
+      "database/*"
     ],
     "directories": {
       "output": "dist"
