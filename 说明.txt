@@ -18,3 +18,9 @@ yarn run build --win
 yarn run build --mac
 
 yarn run build --linux
+
+app.getPath('userData')：返回一个适用于当前操作系统的路径，
+通常位于 AppData（Windows）、Library（macOS）或 ~/.config（Linux）目录下。
+fs.copyFileSync(sourceDbPath, dbPath)：
+如果用户数据目录中没有数据库文件，
+它会从应用包中的 database/data.db 文件复制到 userData 目录。
