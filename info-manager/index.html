@@ -103,6 +103,12 @@
         const menuData = {
             "menus": [
                 {
+                    "name": "DEMO",
+                    "buttons": [
+                        { "id": "btndemo", "text": "DEMO" }
+                    ]
+                },
+                {
                     "name": "图书查询",
                     "buttons": [
                         { "id": "btnquerybook", "text": "图书查询" },
@@ -158,7 +164,11 @@
                 const btn = document.createElement('button');
                 btn.textContent = button.text;
                 btn.onclick = function() {
-                    alert(`${button.text} clicked`);
+                    if(button.text=="DEMO"){
+                        window.formAPI.openUserWindow()
+                    }else{
+                        alert(`${button.text} clicked`);
+                    }
                 };
                 buttonContainer.appendChild(btn);
             });
