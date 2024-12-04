@@ -3,10 +3,10 @@ const path = require('path');
 const fs = require('fs');
 
 // 初始化数据库
-const dbPath = path.join(__dirname, 'database', 'data.db');
+const dbPath = path.join(__dirname,  'data.db');
 if (!fs.existsSync(dbPath)) {
     const db = new sqlite3.Database(dbPath);
-    const initScript = fs.readFileSync(path.join(__dirname, 'database', 'init.sql'), 'utf-8');
+    const initScript = fs.readFileSync(path.join(__dirname, 'init.sql'), 'utf-8');
     db.exec(initScript, (err) => {
         if (err) {
             console.error('Database initialization failed:', err.message);

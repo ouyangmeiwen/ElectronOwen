@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
-
+require('./database/initDB.js');  // 先执行 A.js
 let mainWindow, addUserWindow, editUserWindow;
 
 
