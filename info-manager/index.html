@@ -86,9 +86,10 @@
     <div class="container">
         <div class="menu">
             <ul>
-                <li><a href="#" onclick="loadButtons('menu1')">Menu 1</a></li>
-                <li><a href="#" onclick="loadButtons('menu2')">Menu 2</a></li>
-                <li><a href="#" onclick="loadButtons('menu3')">Menu 3</a></li>
+                <li><a href="#" onclick="loadButtons('欢迎')">欢迎</a></li>
+                <li><a href="#" onclick="loadButtons('DEMO')">DEMO</a></li>
+                <li><a href="#" onclick="loadButtons('图书')">图书</a></li>
+                <li><a href="#" onclick="loadButtons('设置')">设置</a></li>
             </ul>
         </div>
 
@@ -106,42 +107,40 @@
             const buttonContainer = document.getElementById('button-container');
             buttonContainer.innerHTML = '';  // Clear any existing buttons
 
-            if (menu === 'menu1') {
+            if (menu === 'DEMO') {
                 const btn1 = document.createElement('button');
-                btn1.textContent = 'Add User';
-                btn1.onclick = function() {
-                    alert('Add User clicked');
-                };
-
-                const btn2 = document.createElement('button');
-                btn2.textContent = 'Delete User';
-                btn2.onclick = function() {
-                    alert('Delete User clicked');
-                };
-
-                buttonContainer.appendChild(btn1);
-                buttonContainer.appendChild(btn2);
-            } else if (menu === 'menu2') {
-                const btn1 = document.createElement('button');
-                btn1.textContent = 'View Users';
+                btn1.textContent = '用户列表';
                 btn1.onclick = function() {
                     window.formAPI.openUserWindow()
                 };
                 const btn2 = document.createElement('button');
-                btn2.textContent = 'Edit User';
+                btn2.textContent = '其他';
                 btn2.onclick = function() {
-                    alert('Edit User clicked');
+                    alert('其他');
                 };
 
                 buttonContainer.appendChild(btn1);
                 buttonContainer.appendChild(btn2);
-            } else if (menu === 'menu3') {
+            } else if (menu === '图书') {
+                const btn1 = document.createElement('button');
+                btn1.textContent = '其他';
+                btn1.onclick = function() {
+                    alert('Edit User clicked');
+                };
+                const btn2 = document.createElement('button');
+                btn2.textContent = '其他';
+                btn2.onclick = function() {
+                    alert('其他');
+                };
+
+                buttonContainer.appendChild(btn1);
+                buttonContainer.appendChild(btn2);
+            } else if (menu === '设置') {
                 const btn1 = document.createElement('button');
                 btn1.textContent = 'Settings';
                 btn1.onclick = function() {
                     alert('Settings clicked');
                 };
-
                 buttonContainer.appendChild(btn1);
             }
         }
