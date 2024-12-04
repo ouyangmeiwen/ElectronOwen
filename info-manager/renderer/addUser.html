@@ -81,10 +81,10 @@
             const age = document.getElementById('age').value;
             const email = document.getElementById('email').value;
 
-            await window.electronAPI.addUser({ name, age, email });
+            await window.userAPI.addUser({ name, age, email });
 
             // Close the window and notify main window to reload the users
-            window.electronAPI.reloadUsers();
+            window.userAPI.reloadUsers();
             window.close();
         });
     </script>

@@ -78,7 +78,7 @@
         const userId = urlParams.get('id');
 
         (async () => {
-            const user = await window.electronAPI.getUser(userId);
+            const user = await window.userAPI.getUser(userId);
             document.getElementById('name').value = user.name;
             document.getElementById('age').value = user.age;
             document.getElementById('email').value = user.email;
@@ -91,9 +91,9 @@
             const age = document.getElementById('age').value;
             const email = document.getElementById('email').value;
 
-            await window.electronAPI.updateUser({ id: userId, name, age, email });
+            await window.userAPI.updateUser({ id: userId, name, age, email });
 
-            window.electronAPI.reloadUsers();
+            window.userAPI.reloadUsers();
             window.close();
         });
     </script>

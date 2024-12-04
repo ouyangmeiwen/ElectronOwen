@@ -2,7 +2,7 @@ const userTable = document.getElementById('user-table');
 
 // 获取用户数据并渲染
 async function loadUsers() {
-    const users = await window.electronAPI.getUsers();
+    const users = await window.userAPI.getUsers();
     renderUserTable(users);
 }
 
@@ -24,17 +24,17 @@ function renderUserTable(users) {
 
 // 删除用户
 async function deleteUser(id) {
-    await window.electronAPI.deleteUser(id);
+    await window.userAPI.deleteUser(id);
     loadUsers();
 }
 
 // 编辑用户
 function editUser(id) {
-    window.electronAPI.createEditUserWindow(id);
+    window.windowAPI.createEditUserWindow(id);
 }
 
 // 监听更新用户列表的消息
-window.electronAPI.on('update-users', (event, users) => {
+window.windowAPI.on('update-users', (event, users) => {
     renderUserTable(users);
 });
 
