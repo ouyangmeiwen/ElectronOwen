@@ -21,7 +21,7 @@
   "build": {
     "appId": "com.example.infomanager",
     "productName": "InfoManager",
-     "files": [
+    "files": [
       "**/*.js",
       "database/**/*",
       "dist/**/*",
