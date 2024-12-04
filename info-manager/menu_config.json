@@ -1,0 +1,35 @@
+{
+    "menus": [
+        {
+            "name": "图书查询",
+            "buttons": [
+                { "id": "btnquerybook", "text": "图书查询" },
+                { "id": "btnqueryinv", "text": "盘点查询" },
+                { "id": "btnqueryloc", "text": "定位查询" }
+
+            ]
+        },
+        {
+            "name": "常用工具",
+            "buttons": [
+                { "id": "btnimport", "text": "图书导入" },
+                { "id": "btnimportloc", "text": "定位导入" },
+                { "id": "btndbchange", "text": "数据清洗" }
+            ]
+        },
+        {
+            "name": "定制化",
+            "buttons": [
+                { "id": "btnsm", "text": "通辽智能书架" }
+            ]
+        },
+        {
+            "name": "系统设置",
+            "buttons": [
+                { "id": "btndbset", "text": "数据库设置" },
+                { "id": "btnsocket", "text": "Socket" },
+                { "id": "btnapi", "text": "API" }
+            ]
+        }
+    ]
+}

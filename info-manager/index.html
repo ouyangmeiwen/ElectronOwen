@@ -85,11 +85,8 @@
 <body>
     <div class="container">
         <div class="menu">
-            <ul>
-                <li><a href="#" onclick="loadButtons('欢迎')">欢迎</a></li>
-                <li><a href="#" onclick="loadButtons('DEMO')">DEMO</a></li>
-                <li><a href="#" onclick="loadButtons('图书')">图书</a></li>
-                <li><a href="#" onclick="loadButtons('设置')">设置</a></li>
+            <ul id="menu-list">
+                <!-- Menus will be dynamically loaded here -->
             </ul>
         </div>
 
@@ -102,48 +99,73 @@
     </div>
 
     <script>
-        // Function to load buttons dynamically based on selected menu item
+        // Sample JSON data
+        const menuData = {
+            "menus": [
+                {
+                    "name": "图书查询",
+                    "buttons": [
+                        { "id": "btnquerybook", "text": "图书查询" },
+                        { "id": "btnqueryinv", "text": "盘点查询" },
+                        { "id": "btnqueryloc", "text": "定位查询" }
+                    ]
+                },
+                {
+                    "name": "常用工具",
+                    "buttons": [
+                        { "id": "btnimport", "text": "图书导入" },
+                        { "id": "btnimportloc", "text": "定位导入" },
+                        { "id": "btndbchange", "text": "数据清洗" }
+                    ]
+                },
+                {
+                    "name": "定制化",
+                    "buttons": [
+                        { "id": "btnsm", "text": "通辽智能书架" }
+                    ]
+                },
+                {
+                    "name": "系统设置",
+                    "buttons": [
+                        { "id": "btndbset", "text": "数据库设置" },
+                        { "id": "btnsocket", "text": "Socket" },
+                        { "id": "btnapi", "text": "API" }
+                    ]
+                }
+            ]
+        };
+
+        // Function to dynamically load the menu and buttons
+        function loadMenus() {
+            const menuList = document.getElementById('menu-list');
+            menuData.menus.forEach(menu => {
+                const menuItem = document.createElement('li');
+                const menuLink = document.createElement('a');
+                menuLink.href = "#";
+                menuLink.textContent = menu.name;
+                menuLink.onclick = () => loadButtons(menu);  // Load corresponding buttons when clicked
+                menuItem.appendChild(menuLink);
+                menuList.appendChild(menuItem);
+            });
+        }
+
+        // Function to load buttons based on selected menu
         function loadButtons(menu) {
             const buttonContainer = document.getElementById('button-container');
             buttonContainer.innerHTML = '';  // Clear any existing buttons
 
-            if (menu === 'DEMO') {
-                const btn1 = document.createElement('button');
-                btn1.textContent = '用户列表';
-                btn1.onclick = function() {
-                    window.formAPI.openUserWindow()
+            menu.buttons.forEach(button => {
+                const btn = document.createElement('button');
+                btn.textContent = button.text;
+                btn.onclick = function() {
+                    alert(`${button.text} clicked`);
                 };
-                const btn2 = document.createElement('button');
-                btn2.textContent = '其他';
-                btn2.onclick = function() {
-                    alert('其他');
-                };
-
-                buttonContainer.appendChild(btn1);
-                buttonContainer.appendChild(btn2);
-            } else if (menu === '图书') {
-                const btn1 = document.createElement('button');
-                btn1.textContent = '其他';
-                btn1.onclick = function() {
-                    alert('Edit User clicked');
-                };
-                const btn2 = document.createElement('button');
-                btn2.textContent = '其他';
-                btn2.onclick = function() {
-                    alert('其他');
-                };
-
-                buttonContainer.appendChild(btn1);
-                buttonContainer.appendChild(btn2);
-            } else if (menu === '设置') {
-                const btn1 = document.createElement('button');
-                btn1.textContent = 'Settings';
-                btn1.onclick = function() {
-                    alert('Settings clicked');
-                };
-                buttonContainer.appendChild(btn1);
-            }
+                buttonContainer.appendChild(btn);
+            });
         }
+
+        // Initial menu load
+        loadMenus();
     </script>
 </body>
 </html>
