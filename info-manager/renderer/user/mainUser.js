@@ -8,11 +8,11 @@ function createAddUserWindow(userWindow) {
         modal: true,
         parent: userWindow,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, '..', '..', 'preload.js'),
             contextIsolation: true,
         },
     });
-    addUserWindow.loadFile('./renderer/user/addUser.html');
+    addUserWindow.loadFile(path.join(__dirname,'addUser.html'));
 }
 
 // 创建编辑用户窗口
@@ -23,12 +23,12 @@ function createEditUserWindow(userWindow,id) {
         modal: true,
         parent: userWindow,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, '..', '..','preload.js'),
             contextIsolation: true,
         },
     });
 
-    const editUserUrl = `file://${path.join(__dirname, 'renderer',"user", 'editUser.html')}?id=${id}`;
+    const editUserUrl = `file://${path.join(__dirname,'editUser.html')}?id=${id}`;
     editUserWindow.loadURL(editUserUrl);
 }
 
