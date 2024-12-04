@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 require('./database/initDB.js');  // 先执行 A.js
-const { setupIPC } = require('./ipcHandlers');  // 引入事件处理模块
+const { setupIPC } = require('./renderer/user/ipcHandlersUser.js');  // 引入事件处理模块
 let mainWindow, addUserWindow, editUserWindow;
 // 创建主窗口
 function createMainWindow() {
@@ -15,7 +15,7 @@ function createMainWindow() {
         },
     });
 
-    mainWindow.loadFile('./renderer/user/index.html');
+    mainWindow.loadFile('./renderer/user/indexUser.html');
 }
 
 // 创建新增用户窗口

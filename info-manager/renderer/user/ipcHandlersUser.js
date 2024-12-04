@@ -1,6 +1,6 @@
 const { ipcMain } = require('electron');
 const sqlite3 = require('sqlite3').verbose();
-const { getDbPath } = require('./database/initDB.js');
+const { getDbPath } = require('../../database/initDB.js');
 
 // 获取数据库连接
 const db = new sqlite3.Database(getDbPath(), (err) => {
