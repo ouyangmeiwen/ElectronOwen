@@ -3,12 +3,19 @@ const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 require('./database/initDB.js');  // 先执行 A.js
+const { getDbPath } = require('./database/initDB.js'); // 引入 initDB.js
 let mainWindow, addUserWindow, editUserWindow;
 
-
-
-
-const db = new sqlite3.Database(path.join(__dirname, 'database', 'data.db'));
+const dbPath=getDbPath()
+// 创建 SQLite 数据库连接
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error('Error opening database:', err.message);
+    } else {
+      console.log('Database opened successfully at:', dbPath);
+    }
+  });
+//const db = new sqlite3.Database(path.join(__dirname, 'database', 'data.db'));
 // 创建主窗口
 function createMainWindow() {
     mainWindow = new BrowserWindow({
