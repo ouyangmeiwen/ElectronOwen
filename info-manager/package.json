@@ -22,9 +22,11 @@
     "appId": "com.example.infomanager",
     "productName": "InfoManager",
      "files": [
+      "**/*.js",
       "database/**/*",
       "dist/**/*",
       "node_modules/**/*",
+      "ipcHandlers.js",
       "renderer/**/*",
       "main.js",
       "package.json",
