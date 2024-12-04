@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('formAPI', {
+    openUserWindow: () => ipcRenderer.invoke('open-user-window'),
     openAddUserWindow: () => ipcRenderer.invoke('open-add-user-window'),
     createEditUserWindow: (id) => ipcRenderer.invoke('create-edit-user-window', id),
     on: (channel, callback) => ipcRenderer.on(channel, callback),

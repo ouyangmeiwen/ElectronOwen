@@ -12,16 +12,8 @@ const db = new sqlite3.Database(getDbPath(), (err) => {
 });
 
 // 注册所有的 IPC 事件处理函数
-function setupIPC(mainWindow, createAddUserWindow, createEditUserWindow) {
-    // 获取所有用户
-    ipcMain.handle('get-users', () => {
-        return new Promise((resolve, reject) => {
-            db.all('SELECT * FROM users', [], (err, rows) => {
-                if (err) reject(err);
-                resolve(rows);
-            });
-        });
-    });
+function setupIPC(userWindow, createAddUserWindow, createEditUserWindow) {
+
 
     // 添加用户
     ipcMain.handle('add-user', (event, user) => {
@@ -77,9 +69,12 @@ function setupIPC(mainWindow, createAddUserWindow, createEditUserWindow) {
         });
 
         // 更新主窗口的用户数据
-        mainWindow.webContents.send('update-users', users);
+        if (userWindow && userWindow.webContents) {
+            userWindow.webContents.send('update-users', users);
+        } else {
+            console.error('userWindow is not available');
+        }
     });
-
     // 打开新增用户窗口
     ipcMain.handle('open-add-user-window', () => {
         createAddUserWindow();
@@ -90,7 +85,23 @@ function setupIPC(mainWindow, createAddUserWindow, createEditUserWindow) {
         createEditUserWindow(id);
     });
 }
-
+// 注册所有的 IPC 事件处理函数
+function setupMainIPC(createUserWindow) {
+    // 打开用户窗口
+    ipcMain.handle('open-user-window', () => {
+        createUserWindow();
+    });
+    // 获取所有用户
+    ipcMain.handle('get-users', () => {
+        return new Promise((resolve, reject) => {
+            db.all('SELECT * FROM users', [], (err, rows) => {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    });
+}
 module.exports = {
-    setupIPC
+    setupIPC,
+    setupMainIPC
 };
