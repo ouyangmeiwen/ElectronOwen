@@ -29,6 +29,7 @@
       "ipcHandlers.js",
       "renderer/**/*",
       "main.js",
+      "menu_config.json",
       "package.json",
       "preload.js"
     ],

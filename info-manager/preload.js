@@ -18,3 +18,7 @@ contextBridge.exposeInMainWorld('userAPI', {
     reloadUsers: () => ipcRenderer.send('reload-users'),
     on: (channel, callback) => ipcRenderer.on(channel, callback),
 });
+// 通过 `contextBridge` 暴露安全的 API 给渲染进程
+contextBridge.exposeInMainWorld('jsonAPI', {
+    readJsonFile: (filePath) => ipcRenderer.invoke('read-json-file', filePath)
+});

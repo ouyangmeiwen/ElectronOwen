@@ -1,6 +1,12 @@
 {
     "menus": [
         {
+            "name": "DEMO",
+            "buttons": [
+                { "id": "btndemo", "text": "DEMO" }
+            ]
+        },
+        {
             "name": "图书查询",
             "buttons": [
                 { "id": "btnquerybook", "text": "图书查询" },

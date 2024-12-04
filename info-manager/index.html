@@ -99,50 +99,20 @@
     </div>
 
     <script>
-        // Sample JSON data
-        const menuData = {
-            "menus": [
-                {
-                    "name": "DEMO",
-                    "buttons": [
-                        { "id": "btndemo", "text": "DEMO" }
-                    ]
-                },
-                {
-                    "name": "图书查询",
-                    "buttons": [
-                        { "id": "btnquerybook", "text": "图书查询" },
-                        { "id": "btnqueryinv", "text": "盘点查询" },
-                        { "id": "btnqueryloc", "text": "定位查询" }
-                    ]
-                },
-                {
-                    "name": "常用工具",
-                    "buttons": [
-                        { "id": "btnimport", "text": "图书导入" },
-                        { "id": "btnimportloc", "text": "定位导入" },
-                        { "id": "btndbchange", "text": "数据清洗" }
-                    ]
-                },
-                {
-                    "name": "定制化",
-                    "buttons": [
-                        { "id": "btnsm", "text": "通辽智能书架" }
-                    ]
-                },
-                {
-                    "name": "系统设置",
-                    "buttons": [
-                        { "id": "btndbset", "text": "数据库设置" },
-                        { "id": "btnsocket", "text": "Socket" },
-                        { "id": "btnapi", "text": "API" }
-                    ]
-                }
-            ]
-        };
+        // 默认加载本地 JSON 文件
+        const jsonFilePath = './menu_config.json'; // 本地 JSON 文件路径
 
-        // Function to dynamically load the menu and buttons
-        function loadMenus() {
+        window.jsonAPI.readJsonFile(jsonFilePath)
+            .then(menuData => {
+                console.log(menuData); // 打印读取的数据，检查是否成功
+                loadMenus(menuData);  // 读取文件后加载菜单
+            })
+            .catch(err => {
+                console.error("读取文件失败", err);
+            });
+
+        // 动态加载菜单和按钮
+        function loadMenus(menuData) {
             const menuList = document.getElementById('menu-list');
             menuData.menus.forEach(menu => {
                 const menuItem = document.createElement('li');
@@ -155,7 +125,7 @@
             });
         }
 
-        // Function to load buttons based on selected menu
+        // 加载选中的菜单对应的按钮
         function loadButtons(menu) {
             const buttonContainer = document.getElementById('button-container');
             buttonContainer.innerHTML = '';  // Clear any existing buttons
@@ -163,19 +133,18 @@
             menu.buttons.forEach(button => {
                 const btn = document.createElement('button');
                 btn.textContent = button.text;
+                btn.id = button.id;  // 设置按钮的 id
                 btn.onclick = function() {
-                    if(button.text=="DEMO"){
-                        window.formAPI.openUserWindow()
+                    // 通过 this.id 获取按钮的 id
+                    if(this.id=="btndemo"){
+                        window.formAPI.openUserWindow();
                     }else{
-                        alert(`${button.text} clicked`);
+                        alert(`${button.text} (ID: ${this.id}) clicked`);
                     }
                 };
                 buttonContainer.appendChild(btn);
             });
         }
-
-        // Initial menu load
-        loadMenus();
     </script>
 </body>
 </html>
