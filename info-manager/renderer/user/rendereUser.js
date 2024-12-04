@@ -15,7 +15,7 @@ function renderUserTable(users) {
             <td>${user.age}</td>
             <td>${user.email}</td>
             <td>
-                <button onclick="deleteUser(${user.id})">Delete</button>
+                <button  class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
                 <button onclick="editUser(${user.id})">Edit</button>
             </td>
         </tr>
