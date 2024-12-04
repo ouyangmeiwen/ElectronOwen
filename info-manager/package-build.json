@@ -15,19 +15,23 @@
     "electron-builder": "^25.1.8"
   },
   "dependencies": {
+    "info-manager": "file:",
     "sqlite3": "^5.1.6"
   },
   "build": {
     "appId": "com.example.infomanager",
     "productName": "InfoManager",
-    "files": [
+     "files": [
+      "**/*.js",
+      "database/**/*",
       "dist/**/*",
       "node_modules/**/*",
+      "ipcHandlers.js",
       "renderer/**/*",
       "main.js",
+      "menu_config.json",
       "package.json",
-      "preload.js",
-      "database/**/*"
+      "preload.js"
     ],
     "directories": {
       "output": "dist"
