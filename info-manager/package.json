@@ -22,13 +22,13 @@
     "appId": "com.example.infomanager",
     "productName": "InfoManager",
      "files": [
+      "database/**/*",
       "dist/**/*",
       "node_modules/**/*",
       "renderer/**/*",
       "main.js",
       "package.json",
-      "preload.js",
-      "database/**/*"
+      "preload.js"
     ],
     "directories": {
       "output": "dist"
