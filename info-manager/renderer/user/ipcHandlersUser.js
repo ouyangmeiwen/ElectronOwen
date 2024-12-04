@@ -11,10 +11,8 @@ const db = new sqlite3.Database(getDbPath(), (err) => {
     }
 });
 
-// 注册所有的 IPC 事件处理函数
-function setupIPC(userWindow, createAddUserWindow, createEditUserWindow) {
-
-
+// 注册所有的 IPC 内部事件处理函数
+function registerUserPrivateIPC(userWindow, createAddUserWindow, createEditUserWindow) {
     // 添加用户
     ipcMain.handle('add-user', (event, user) => {
         return new Promise((resolve, reject) => {
@@ -85,8 +83,8 @@ function setupIPC(userWindow, createAddUserWindow, createEditUserWindow) {
         createEditUserWindow(userWindow,id);
     });
 }
-// 注册所有的 IPC 事件处理函数
-function setupMainIPC(createUserWindow) {
+// 注册所有的 IPC 外部事件处理函数
+function registerUserPublicIPC(createUserWindow) {
     // 打开用户窗口
     ipcMain.handle('open-user-window', () => {
         createUserWindow();
@@ -102,6 +100,6 @@ function setupMainIPC(createUserWindow) {
     });
 }
 module.exports = {
-    setupIPC,
-    setupMainIPC
+    registerUserPrivateIPC,
+    registerUserPublicIPC
 };
