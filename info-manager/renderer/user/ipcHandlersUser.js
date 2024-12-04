@@ -77,12 +77,12 @@ function setupIPC(userWindow, createAddUserWindow, createEditUserWindow) {
     });
     // 打开新增用户窗口
     ipcMain.handle('open-add-user-window', () => {
-        createAddUserWindow();
+        createAddUserWindow(userWindow);
     });
 
     // 打开编辑用户窗口
     ipcMain.handle('create-edit-user-window', (event, id) => {
-        createEditUserWindow(id);
+        createEditUserWindow(userWindow,id);
     });
 }
 // 注册所有的 IPC 事件处理函数
