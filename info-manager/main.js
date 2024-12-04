@@ -15,7 +15,7 @@ function createMainWindow() {
         },
     });
 
-    mainWindow.loadFile('./renderer/index.html');
+    mainWindow.loadFile('./renderer/user/index.html');
 }
 
 // 创建新增用户窗口
@@ -30,7 +30,7 @@ function createAddUserWindow() {
             contextIsolation: true,
         },
     });
-    addUserWindow.loadFile('./renderer/addUser.html');
+    addUserWindow.loadFile('./renderer/user/addUser.html');
 }
 
 // 创建编辑用户窗口
@@ -46,7 +46,7 @@ function createEditUserWindow(id) {
         },
     });
 
-    const editUserUrl = `file://${path.join(__dirname, 'renderer', 'editUser.html')}?id=${id}`;
+    const editUserUrl = `file://${path.join(__dirname, 'renderer',"user", 'editUser.html')}?id=${id}`;
     editUserWindow.loadURL(editUserUrl);
 }
 
