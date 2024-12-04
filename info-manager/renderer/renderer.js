@@ -30,11 +30,11 @@ async function deleteUser(id) {
 
 // 编辑用户
 function editUser(id) {
-    window.windowAPI.createEditUserWindow(id);
+    window.formAPI.createEditUserWindow(id);
 }
 
 // 监听更新用户列表的消息
-window.windowAPI.on('update-users', (event, users) => {
+window.formAPI.on('update-users', (event, users) => {
     renderUserTable(users);
 });
 
