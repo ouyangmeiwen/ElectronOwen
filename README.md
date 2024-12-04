@@ -1,1 +1,1 @@
-记忆 Electron 写的小程序
+基于 Electron 写的客户端框架
